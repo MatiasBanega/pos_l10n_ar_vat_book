@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ar_vat_book_pos_config_inherit" model="ir.ui.view">
+        <field name="name">ar.vat.book.pos.config.form.</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='iface_invoicing']" position="after">
+                <!-- <h2 attrs="{'invisible': [('journal_used_documents', '=', False)]}">Auto Invoice background</h2> -->
+                <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': ['|',('journal_used_documents', '=', False), ('module_account', '=', False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="journal_used_documents" invisible='1' />
+                                <field name="invoice_background"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="invoice_background"/>
+                                <div class="text-muted">
+                                   Auto invoices, journal with documents
+                                </div>
+                                <div class="content-group mt16" attrs="{'invisible': [('invoice_background', '=', False)]}">
+                                    <div class="row mt16">
+                                        <label for="partner_default" class="col-lg-3 o_light_label"/>
+                                        <field name="partner_default"  domain="[('customer_rank','>', 0)]"/>   
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="invisible_button_invoice" class="col-lg-3 o_light_label"/>
+                                        <field name="invisible_button_invoice"/>   
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+               <!--  <div class="row mt16 o_settings_container" attrs="{'invisible': [('journal_used_documents', '=', False)]}">  
+                     <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">                            
+                            <field name="journal_used_documents" invisible='1' />
+                            <label for="invoice_background"/>   
+                            <field name="invoice_background" />
+                        </div>
+                       
+                    </div>                     
+                    <div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible': [('invoice_background', '=', False)]}">
+                        <div class="o_setting_right_pane" >
+                            <label for="partner_default"/>                                                    
+                            <field name="partner_default"  domain="[('customer_rank','>', 0)]"/>   
+                        </div>                        
+                    </div>
+                </div> -->
+               
+            </xpath>
+        </field>
+        </record>       
+  </data>
+</odoo>
